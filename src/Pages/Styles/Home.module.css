@@ -1,0 +1,207 @@
+.wrapper_page {
+	width: 100%;
+	height: auto;
+}
+/*Баннер*/
+.banner {
+	max-width: 1440px;
+	margin: 0px auto;
+	height: auto;
+	position: relative;
+}
+.banner_bg {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+.banner_content_block {
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	background-color: #fff;
+	border-radius: 16px;
+	max-width: 570px;
+	max-height: 308px;
+	padding: 55px 80px;
+	text-align: center;
+}
+.banner_content_block p {
+	font-size: 13px;
+	line-height: 16px;
+	color: #A5C926;
+	font-weight: 400;
+}
+.banner_content_block h2 {
+	max-width: 416px;
+	font-size: 39px;
+	line-height: 48px;
+	color: #111111;
+	font-weight: 400;
+	padding: 25px 0px;
+}
+.link_block_green {
+	padding: 15px 30px;
+	background-color: #A5C926;
+	border-radius: 24px;
+	display: inline-block;
+}
+.link_block_green a {
+	font-size: 14px;
+	line-height: 24px;
+	color: #fff;
+}
+/*Секция с товарами */
+.products_section {
+	max-width: 1200px;
+	margin: 0px auto;
+	padding: 100px 15px 50px;
+}
+/*------Ссылки с товарами по категориям*/
+.content_title {
+	font-size: 28px;
+	line-height: 36px;
+	color: #fff;
+	font-weight: 500;
+	margin-bottom: 25px;
+}
+.link_btn {
+	background-color: #fff;
+	border-radius: 20px;
+	padding: 12px 25px;
+	font-size: 13px;
+	line-height: 24px;
+	transition: all 0.5s ease;
+}
+.link_btn:hover {
+	background-color: #A5C926;
+	color: #fff;
+}
+.category_links_list {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	gap: 30px 30px;
+	flex-wrap: wrap;
+}
+/*Ссылка на stuffed игрушки*/
+.category_link_item_stuffed {
+	flex: 0 1 570px;
+	height: 188px;
+	background-color: #FFC12C;
+	border-radius: 16px;
+}
+.item_stuffed_content {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	position: relative;
+}
+.item_stuffed_content_image {
+	position: absolute;
+	left: 15px;
+	top: -58px;
+}
+.stuffed_content {
+	flex: 0 1 50%;
+}
+
+/*Ссылка на Wooden игрушки*/
+.category_link_item_wooden {
+	flex: 0 1 570px;
+	height: 188px;
+	background-color: #FB416B;
+	border-radius: 16px;
+}
+
+.item_wooden_content {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+}
+.item_wooden_content_image {
+	position: absolute;
+	left: 329px;
+	top: -49px;
+}
+.wooden_content {
+	flex: 0 1 50%;
+	text-align: right;
+}
+/*Секция список игрушек 4шт в разрезе категорий*/
+
+.product_list {
+	max-width: 1200px;
+	margin: 0px auto;
+	padding: 0px 15px 100px 15px;
+}
+.product_list_block {
+	width: 100%;
+	height: auto;
+	padding-top: 25px;
+}
+.product_list_header {
+	font-size: 28px;
+	line-height: 36px;
+	font-weight: 500;
+	padding-bottom: 25px;
+	border-bottom: 2px solid #E5E5E5;
+	position: relative;
+}
+.product_list_header::after {
+	content: '';
+	position: absolute;
+	background-color: #A5C926;
+	width: 136px;
+	height: 2px;
+	display: block;
+	bottom: -2px;
+	left: 0;
+}
+.product_tabs_list {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 50px;
+}
+.product_tabs_item {
+	flex: 0 1 270px;
+	height: 328px;
+	background-color: #fff;
+	border-radius: 16px;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+	text-align: center;
+	padding: 15px;
+	transition: all 0.2s ease-in;
+}
+.product_tabs_item:hover {
+	opacity: 0.8;
+}
+.product_image {
+	width: 182px;
+	height: 182px;
+	object-fit: contain;
+	padding-bottom: 25px;
+}
+.product_name {
+	font-size: 14px;
+	line-height: 20px;
+	padding-bottom: 15px;
+}
+.btn_add_to_cart {
+	background-color: #A5C926;
+	border-radius: 16px;
+	text-align: center;
+	padding: 7px 13px;
+	text-transform: uppercase;
+	font-size: 12px;
+	line-height: 20px;
+	color: #fff;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
-import style from './Header.module.css';
+import style from './Header.module.css';//Стили
+import { NavLink } from 'react-router-dom';//Для ссылок
 
 //Функциональный компонент шапка сайта - Header
 function Header(props){
@@ -34,9 +35,9 @@ function Header(props){
 			<div className={style.header_nav}>
 				<nav className={style.nav}>
 					<div className={style.block_logo_link}>
-						<a href="#" className={style.logo_link}>
+						<NavLink href="/" className={style.logo_link}>
 							ToyStore
-						</a>
+						</NavLink>
 					</div>
 					<div className={style.nav_link_list}>
 						<a href="#" className={style.nav_link_item}>

@@ -1,0 +1,72 @@
+{
+	"toys":[
+		{
+			"id":1,
+			"name":"Teddy Bear",
+			"category_id":"1",
+			"price":30,
+			"image":"images/toys/Teddy Bear.svg"
+		},
+		{
+			"id": 2,
+			"name": "Mega Plush Toy",
+			"category_id": "1",
+			"price": 38,
+			"image": "images/toys/Mega Plush Toy.svg"
+		},
+		{
+			"id": 3,
+			"name": "Cute Dog",
+			"category_id": "1",
+			"price": 24,
+			"image": "images/toys/Cute Dog.svg"
+		},
+		{
+			"id": 4,
+			"name": "Little Friend",
+			"category_id": "1",
+			"price": 27,
+			"image": "images/toys/Little Friend.svg"
+		},
+
+		{
+			"id": 5,
+			"name": "Happy Flower",
+			"category_id": "2",
+			"price": 38,
+			"image": "images/toys/Happy Flower.svg"
+		},
+		{
+			"id": 6,
+			"name": "Lift Machine",
+			"category_id": "2",
+			"price": 24,
+			"image": "images/toys/Lift Machine.svg"
+		},
+		{
+			"id": 7,
+			"name": "Wooden Camera",
+			"category_id": "2",
+			"price": 32,
+			"image": "images/toys/Wooden Camera.svg"
+		},
+		{
+			"id": 8,
+			"name": "Little Rabbit",
+			"category_id": "2",
+			"price": 16,
+			"image": "images/toys/Little Rabbit.svg"
+		}
+	],
+
+	"category":[
+		{
+			"id":1,
+			"name":"Stuffed"
+		},
+		{
+			"id": 2,
+			"name": "Wooden"
+		}
+	]
+}

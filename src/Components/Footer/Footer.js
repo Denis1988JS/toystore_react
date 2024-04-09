@@ -1,6 +1,6 @@
 import React from 'react';
-import style from './Footer.module.css';
-
+import style from './Footer.module.css';//Стили
+import { NavLink } from 'react-router-dom';//Для ссылок
 
 //Функциональный компонент шапка сайта - Header
 function Footer(props) {
@@ -8,12 +8,12 @@ function Footer(props) {
 		<footer className={style.footer}>
 			<div className={style.footer_nav}>
 				<div className={style.footer_nav_logo}>
-					<a href="#" className={style.logo_link}>
+					<NavLink to="/" className={style.logo_link}>
 						ToyStore
-					</a>
+					</NavLink>
 				</div>
 				<nav className={style.footer_nav_list}>
-					<a href="#" className={style.nav_list_item}>Home</a>
+					<NavLink to="/" className={style.nav_list_item}>Home</NavLink>
 					<a href="#" className={style.nav_list_item}>Catalog</a>
 					<a href="#" className={style.nav_list_item}>Delivery</a>
 					<a href="#" className={style.nav_list_item}>About</a>
