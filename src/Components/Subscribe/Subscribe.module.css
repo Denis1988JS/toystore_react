@@ -1,0 +1,71 @@
+.subscribeWripper {
+	width: 100%;
+	height: auto;
+	padding: 0px 15px 100px;
+}
+.subscribeBlock {
+	max-width: 1200px;
+	height: 173px;
+	margin: 0px auto;
+	background-color: #FFFFFF;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 16px;
+	padding: 0px 50px;
+	flex-wrap: wrap;
+}
+.subscribeBlockContent {
+	flex: 0 1 390px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 25px;
+}
+.subscribeLogo {
+	background-color: #A5C926;
+}
+.subscribeLogo img {
+	padding: 16px;
+}
+.subscribeContent {
+	font-size: 23px;
+	line-height: 32px;
+}
+.subscribeContent span {
+	font-size: 23px;
+	line-height: 32px;
+	color: #A5C926;
+}
+.subscribeForm {
+	flex: 0 1 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 25px;
+}
+.subscribeInputEmail {
+	width: 376px;
+	background-color: #F8F8F8;
+	border:2px solid #E5E5E5;
+	border-radius: 24px;
+	padding: 14px 20px;
+}
+.subscribeInputEmail:focus{
+	background-color: #FFC12C;
+}
+.subscribeFormSend {
+	background-color: #A5C926;
+	border-radius: 25px;
+	text-align: center;
+	padding: 15px 30px;
+	text-transform: uppercase;
+	font-size: 12px;
+	line-height: 20px;
+	color: #fff
+}
+
+.message_block {
+	flex: 0 1 100%;
+}
+

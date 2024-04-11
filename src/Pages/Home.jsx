@@ -1,6 +1,10 @@
 import React from 'react';
 import s from './Styles/Home.module.css'//Стили
 import { NavLink } from 'react-router-dom';//Для ссылок
+import VideoContent from '../Components/VideoContent/VideoContent';//Блок видео-контент
+import EcommerceTemplate from '../Components/EcommerceTemplate/EcommerceTemplate';//Блок электронная комменрция
+import Subscribe from '../Components/Subscribe/Suscribe';//Блок подписка на скидку
+//импорт компонентом
 
 function Home(props){
 	//Получаем пропсы
@@ -108,6 +112,9 @@ function Home(props){
 							</div>
 				})}
 			</section>
+			<VideoContent />
+			<EcommerceTemplate />
+			<Subscribe subscribers={props.subscribers} subscribeOn={props.subscribeOn} />
 		</main>
 	)
 };
