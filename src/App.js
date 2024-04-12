@@ -5,7 +5,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom'; //Для
 import Header from './Components/Header/Header';//шапка сайта
 import Footer from './Components/Footer/Footer';//подвал сайта
 import Home from './Pages/Home';//домашняя страница
-
+import CategoryToys from './Pages/CategoryToys';//Страница товары в разрезе категории
 
 //url json-server
 let url = 'http://localhost:3001/' // url-для сапросов на сервер
@@ -13,20 +13,22 @@ let url = 'http://localhost:3001/' // url-для сапросов на серв�
 function App() {
   //Хуки useState
   const [toys, setToys] = React.useState([]);//Хук - карточки товаров (игрушек)
-  const [category, setCategory] = React.useState([])//Хук - все категории товаров
-  const [subscribers, setSubscribers] = React.useState([])//Хук - подписчики на скидку
-
+  const [category, setCategory] = React.useState([]);//Хук - все категории товаров
+  const [subscribers, setSubscribers] = React.useState([]);//Хук - подписчики на скидку
+  const [toysPhotos, setToysPhotos ] = React.useState([]);//Хук - список фотографий игрушек 6 фото
 //Запрос на сервер - получить все товары и все подписки на скидку
 React.useEffect(()=>{
   async function fetchData(){
     try{
-      const [toys, categories, subscribers] = await Promise.all([
+      const [toys, categories, subscribers, toysPhotos] = await Promise.all([
       //Получаем список игрушек
       fetch(`${url}toys`).then((res) => {return res.json()}).then((toys) => { setToys(toys)}),
       //Получаем список категорий
       fetch(`${url}category`).then((res) => { return res.json() }).then((category) => { setCategory(category)}),
       //Список подписанных пользователей
       fetch(`${url}subscribers`).then((res) => { return res.json() }).then((subscribers) => { setSubscribers(subscribers)}),
+      //Список фотографий игрушек
+      fetch(`${url}toy_photos`).then((res) => { return res.json() }).then((toys) => { setToysPhotos(toys.slice(0, 6))}),
     ])}
     
     //Отлов ошибок
@@ -59,9 +61,9 @@ const subscribeOn = async (e) => {
     //Вносим данный на сервер и хук setSubscribers
     else {
       let subscribers_rev = subscribers.reverse()
-      const lastId = subscribers_rev[0]['id'] + 1;
+      const lastId = Number(subscribers_rev[0]['id']) + 1;
       let user = {
-        "id": lastId,
+        "id": String(lastId),
         "email": e.target.email.value,
         "time_sibsribe": getTime()
       }
@@ -75,7 +77,7 @@ const subscribeOn = async (e) => {
           body: JSON.stringify(user)
         }).then(res => {
           if (res.ok) { return res.json() }
-        }).then(sibsribe => { console.log(sibsribe); setSubscribers((prev) => [...prev, sibsribe]) }).catch(error => { console.log(error) })
+        }).then(sibsribe => { setSubscribers((prev) => [...prev, sibsribe]) }).catch(error => { console.log(error) })
       }
       catch (error) { console.error(error);}
       let message_block = document.getElementById('message_block');
@@ -87,12 +89,15 @@ const subscribeOn = async (e) => {
     }
 }
 
+
+
   return (
     <Router>
       <div className='wrapper'>
         <Header/>
         <Routes>
-          <Route path='' element={<Home toys={toys} category={category} subscribers={subscribers} subscribeOn={subscribeOn} exact/>} />
+          <Route path='' element={<Home toys={toys} category={category} subscribers={subscribers} subscribeOn={subscribeOn} toysPhotosList={toysPhotos} exact/>} />
+          <Route path='product/category/:slug' element={<CategoryToys  category={category} />} exact />
         </Routes>
 
         <Footer/>

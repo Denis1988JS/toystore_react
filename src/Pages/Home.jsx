@@ -1,15 +1,18 @@
 import React from 'react';
 import s from './Styles/Home.module.css'//Стили
-import { NavLink } from 'react-router-dom';//Для ссылок
+import { NavLink , Link } from 'react-router-dom';//Для ссылок
 import VideoContent from '../Components/VideoContent/VideoContent';//Блок видео-контент
 import EcommerceTemplate from '../Components/EcommerceTemplate/EcommerceTemplate';//Блок электронная комменрция
 import Subscribe from '../Components/Subscribe/Suscribe';//Блок подписка на скидку
+import ToysPhotos from '../Components/ToysPhotos/ToysPhotos';//Блок список фотографий игрушек
 //импорт компонентом
 
 function Home(props){
-	//Получаем пропсы
+	//Получаем пропсы по отдельности
 	let cat_list = props.category;
 	let product_list = props.toys;
+
+
 	return (
 		<main className={s.wrapper_page}>
 			<section className={s.banner}>
@@ -39,9 +42,9 @@ function Home(props){
 									</div>
 									<div className={s.stuffed_content}>
 										<h2 className={s.content_title}>
-											{e.name} Animals
+											{e.name}
 										</h2>
-										<NavLink to={`/category/${e.id}`} className={s.link_btn}>Shop Now</NavLink>
+											<Link to={`/product/category/${e.slug}`} className={s.link_btn} state={{ "product_list": product_list, "cat_id": e.id, "cat_name": e.name }}>Shop Now</Link>
 									</div>
 								</div>
 							</div>
@@ -49,9 +52,9 @@ function Home(props){
 							<div className={s.item_wooden_content}>
 								<div className={s.wooden_content}>
 									<h2 className={s.content_title}>
-										{e.name} Animals
+										{e.name}
 									</h2>
-									<NavLink to={`/category/${e.id}`} className={s.link_btn}>Shop Now</NavLink>
+											<Link to={`/product/category/${e.slug}`} className={s.link_btn} state={{ "product_list": product_list, "cat_id": e.id, "cat_name": e.name }}>Shop Now</Link>
 								</div>
 								<div className={s.item_wooden_content_image}>
 									<img src="images/home/wooden_banner.svg" alt="Баннер" />
@@ -94,7 +97,7 @@ function Home(props){
 			<section className={s.product_list}>
 				{cat_list.map((cat)=>{
 					return <div className={s.product_list_block} key={cat.id}>
-								<h3 className={s.product_list_header}>{cat.name} Animals</h3>
+								<h3 className={s.product_list_header}>{cat.name}</h3>
 								<div className={s.product_tabs_list}>
 									{product_list.map((toy)=>{
 										return toy.category_id==cat.id?(
@@ -107,7 +110,6 @@ function Home(props){
 											</div>
 										):(null)
 									})}
-
 								</div>
 							</div>
 				})}
@@ -115,6 +117,7 @@ function Home(props){
 			<VideoContent />
 			<EcommerceTemplate />
 			<Subscribe subscribers={props.subscribers} subscribeOn={props.subscribeOn} />
+			<ToysPhotos toysPhotosList={props.toysPhotosList} />
 		</main>
 	)
 };

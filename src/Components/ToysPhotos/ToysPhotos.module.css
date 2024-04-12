@@ -1,0 +1,59 @@
+.wrapperToysPhotos {
+	max-width: 1200px;
+	height: auto;
+	padding: 0px 15px 100px;
+	margin: 0px auto;
+}
+.toysPhotoTitle {
+	font-size: 13px;
+	line-height: 16px;
+	text-align: center;
+	color: #A5C926;
+}
+.toysPhotoTitleHeader {
+	font-size: 31px;
+	line-height: 40px;
+	margin: 0px auto;
+	max-width: 447px;
+	padding-top: 20px;
+	text-align: center;
+}
+.toysPhotosList {
+	width: 100%;
+	height: auto;
+	padding-top: 90px;
+	padding-bottom: 75px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 15px 15px;
+}
+.protoCart {
+	width: 172px;
+	height: 172px;
+}
+.protoCart img {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+	transition: 0.8s;
+}
+.protoCart img:hover {
+	transform: scale(0.9);
+}
+.morePhotosBlock {
+	width: auto;
+	display: flex;
+	justify-content: center;
+}
+.morePhotosLInk {
+	background-color: #A5C926;
+	border-radius: 25px;
+	text-align: center;
+	padding: 15px 30px;
+	text-transform: uppercase;
+	font-size: 12px;
+	line-height: 20px;
+	color: #fff
+}

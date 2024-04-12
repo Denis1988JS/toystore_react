@@ -35,7 +35,7 @@ function Header(props){
 			<div className={style.header_nav}>
 				<nav className={style.nav}>
 					<div className={style.block_logo_link}>
-						<NavLink href="/" className={style.logo_link}>
+						<NavLink to="" className={style.logo_link}>
 							ToyStore
 						</NavLink>
 					</div>

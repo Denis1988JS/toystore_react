@@ -1,56 +1,56 @@
 {
   "toys": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Teddy Bear",
       "category_id": "1",
       "price": 30,
       "image": "images/toys/Teddy Bear.svg"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Mega Plush Toy",
       "category_id": "1",
       "price": 38,
       "image": "images/toys/Mega Plush Toy.svg"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Cute Dog",
       "category_id": "1",
       "price": 24,
       "image": "images/toys/Cute Dog.svg"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Little Friend",
       "category_id": "1",
       "price": 27,
       "image": "images/toys/Little Friend.svg"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Happy Flower",
       "category_id": "2",
       "price": 38,
       "image": "images/toys/Happy Flower.svg"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Lift Machine",
       "category_id": "2",
       "price": 24,
       "image": "images/toys/Lift Machine.svg"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Wooden Camera",
       "category_id": "2",
       "price": 32,
       "image": "images/toys/Wooden Camera.svg"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Little Rabbit",
       "category_id": "2",
       "price": 16,
@@ -59,34 +59,78 @@
   ],
   "category": [
     {
-      "id": 1,
-      "name": "Stuffed"
+      "id": "1",
+      "name": "Stuffed Animals",
+      "slug":"stuffed_animals"
     },
     {
-      "id": 2,
-      "name": "Wooden"
+      "id": "2",
+      "name": "Wooden Toys",
+      "slug": "wooden_toys"
     }
   ],
   "subscribers": [
     {
-      "id": 1,
+      "id": "1",
       "email": "mail@mail.ru",
       "time_sibsribe": "Mon Dec 24 2018 10:33:30 GMT+0700"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "mail13445@mail.ru",
       "time_sibsribe": "2024-04-11T13:48:57.745Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "email": "denis.d88@bk.ru",
-      "time_sibsribe": "2024-04-11T13:49:03.792Z"
+      "time_sibsribe": "2024-04-12T07:22:30.256Z"
     },
     {
-      "id": 4,
-      "email": "denis77.d88@bk.ru",
-      "time_sibsribe": "2024-04-11T13:49:15.520Z"
+      "id": "4",
+      "email": "denis777.d88@bk.ru",
+      "time_sibsribe": "2024-04-12T07:22:36.551Z"
+    },
+    {
+      "id": "5",
+      "email": "denis7777.d88@bk.ru",
+      "time_sibsribe": "2024-04-12T07:22:44.002Z"
+    },
+    {
+      "id": "6",
+      "email": "zuzuZa@mail.ru",
+      "time_sibsribe": "2024-04-12T07:22:50.997Z"
+    }
+  ],
+  "toy_photos":[
+    {
+      "id":"1",
+      "name":"img1",
+      "url":"images/toysPhotoList/1.svg"
+    },
+    {
+      "id": "2",
+      "name": "img2",
+      "url": "images/toysPhotoList/2.svg"
+    },
+    {
+      "id": "3",
+      "name": "img3",
+      "url": "images/toysPhotoList/3.svg"
+    },
+    {
+      "id": "4",
+      "name": "img4",
+      "url": "images/toysPhotoList/4.svg"
+    },
+    {
+      "id": "5",
+      "name": "img5",
+      "url": "images/toysPhotoList/5.svg"
+    },
+    {
+      "id": "6",
+      "name": "img6",
+      "url": "images/toysPhotoList/6.svg"
     }
   ]
 }
