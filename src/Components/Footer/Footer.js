@@ -44,7 +44,7 @@ function Footer(props) {
 				<div className={style.powered_block}>
 					<span>Проект на React</span>
 					<img src="images/footer/tochka.svg" alt="-" />
-					<a href="https://github.com/Denis1988JS" className={style.git_hub_link}>Git Hub</a>
+					<a href="https://github.com/Denis1988JS/toystore_react" className={style.git_hub_link}>Git Hub</a>
 				</div>
 			</div>
 		</footer>

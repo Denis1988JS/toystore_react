@@ -61,7 +61,7 @@
     {
       "id": "1",
       "name": "Stuffed Animals",
-      "slug":"stuffed_animals"
+      "slug": "stuffed_animals"
     },
     {
       "id": "2",
@@ -101,11 +101,11 @@
       "time_sibsribe": "2024-04-12T07:22:50.997Z"
     }
   ],
-  "toy_photos":[
+  "toy_photos": [
     {
-      "id":"1",
-      "name":"img1",
-      "url":"images/toysPhotoList/1.svg"
+      "id": "1",
+      "name": "img1",
+      "url": "images/toysPhotoList/1.svg"
     },
     {
       "id": "2",
@@ -131,6 +131,26 @@
       "id": "6",
       "name": "img6",
       "url": "images/toysPhotoList/6.svg"
+    }
+  ],
+  "users": [
+    {
+      "id": "admin_777",
+      "name": "admin",
+      "email": "mail1@mail.ru",
+      "password": "qwerty"
+    },
+    {
+      "id": "8c54",
+      "name": "Марина",
+      "email": "mail@mail.ru",
+      "password": "qwerty123!2"
+    },
+    {
+      "id": "23ce",
+      "name": "Диана",
+      "email": "zuzuZa@mail.ru",
+      "password": "87jhjhg"
     }
   ]
 }

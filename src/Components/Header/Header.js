@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Header.module.css';//Стили
-import { NavLink } from 'react-router-dom';//Для ссылок
+import { Link, NavLink } from 'react-router-dom';//Для ссылок
 
 //Функциональный компонент шапка сайта - Header
 function Header(props){
@@ -58,9 +58,9 @@ function Header(props){
 						<a href="#" className={style.order}>
 							<img src="images/header/order_link.svg" alt="orders" />
 						</a>
-						<a href="#" className={style.login_link}>
-							<span>O</span>
-						</a>
+						<Link to="register/" className={style.login_link}>
+							<span>Регистрация</span>
+						</Link>
 					</div>
 				</nav>
 			</div>

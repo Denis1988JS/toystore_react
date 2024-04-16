@@ -2,7 +2,8 @@ import React from 'react';
 import s from './Styles/Home.module.css'//Стили
 import { NavLink , Link } from 'react-router-dom';//Для ссылок
 import VideoContent from '../Components/VideoContent/VideoContent';//Блок видео-контент
-import EcommerceTemplate from '../Components/EcommerceTemplate/EcommerceTemplate';//Блок электронная комменрция
+import EcommerceTemplate from '../Components/EcommerceTemplate/EcommerceTemplate';//Блок электронная коммерция
+import ToyCart from '../Components/ToysCart/ToysCart';//Компонент карточка товара
 import Subscribe from '../Components/Subscribe/Suscribe';//Блок подписка на скидку
 import ToysPhotos from '../Components/ToysPhotos/ToysPhotos';//Блок список фотографий игрушек
 //импорт компонентом
@@ -11,8 +12,7 @@ function Home(props){
 	//Получаем пропсы по отдельности
 	let cat_list = props.category;
 	let product_list = props.toys;
-
-
+	
 	return (
 		<main className={s.wrapper_page}>
 			<section className={s.banner}>
@@ -96,18 +96,14 @@ function Home(props){
 			</section>
 			<section className={s.product_list}>
 				{cat_list.map((cat)=>{
+					//Рендер карточек-ссылок категорий
 					return <div className={s.product_list_block} key={cat.id}>
 								<h3 className={s.product_list_header}>{cat.name}</h3>
 								<div className={s.product_tabs_list}>
 									{product_list.map((toy)=>{
+										//Рендер карточек товаров
 										return toy.category_id==cat.id?(
-											<div className={s.product_tabs_item} key={toy.id}>
-												<img src={toy.image} alt="фото товара" className={s.product_image} />
-												<p className={s.product_name}>{toy.name}</p>
-												<button type="text" className={s.btn_add_to_cart}>
-													&#36; {parseFloat(toy.price).toFixed(2)} USD
-												</button>
-											</div>
+											<ToyCart key={toy.id} id={toy.id} image={toy.image} title={toy.name} price={toy.price} />
 										):(null)
 									})}
 								</div>

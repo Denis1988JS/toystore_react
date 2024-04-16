@@ -1,10 +1,11 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'; //Для работы ссылок и роутера маршрутов
+import { HashRouter as Router, Routes, Route, json } from 'react-router-dom'; //Для работы ссылок и роутера маршрутов
 
 //Импорты компонентов
 import Header from './Components/Header/Header';//шапка сайта
 import Footer from './Components/Footer/Footer';//подвал сайта
 import Home from './Pages/Home';//домашняя страница
+import RegisterPage from './Pages/RegisterPage';//Регистрация на сайте
 import CategoryToys from './Pages/CategoryToys';//Страница товары в разрезе категории
 
 //url json-server
@@ -16,6 +17,11 @@ function App() {
   const [category, setCategory] = React.useState([]);//Хук - все категории товаров
   const [subscribers, setSubscribers] = React.useState([]);//Хук - подписчики на скидку
   const [toysPhotos, setToysPhotos ] = React.useState([]);//Хук - список фотографий игрушек 6 фото
+
+  //Хуки для формы регистрации сообщение и был ли submit
+  const [message, setMessage] = React.useState('');//Сообщение о результате регистрации
+  const [isSubmit, setIsSubmit] = React.useState(false);//Статут отправки формы
+
 //Запрос на сервер - получить все товары и все подписки на скидку
 React.useEffect(()=>{
   async function fetchData(){
@@ -37,7 +43,11 @@ React.useEffect(()=>{
     fetchData();
 },[])
 
+
+
+
 //Функция подписаться на скидку
+//Функция получаем время для подписки (просто есть такое поле в модели)
 const getTime = () => {
   let subscribe_time = new Date()
   return subscribe_time
@@ -88,7 +98,34 @@ const subscribeOn = async (e) => {
       message_block.append(message_info);
     }
 }
-
+//Функция - регистрация пользователя
+const registerUser =  async (e) => {
+  const user = {...e};
+  //GET запрос если есть пользователь то отменяем регистрацию - поиск по email
+  const newUser = await fetch(`${url}users/?email=` + `${e.email}`).then((res) => { return res.json() }).then((resUser) => { return resUser }).catch(error => { console.log(error) })
+  //Если есть пользователь с таким же email - то стоп регистрации
+  if (newUser.length >= 1) {
+    setMessage('no')
+    setIsSubmit(false)
+    console.log('Нет')
+  }
+  //Если нет пользователя с таким же email - то регистрация
+  else if (newUser.length == 0){
+    await fetch(`${url}users`, {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    }).then(res => {
+      if (res.ok) { return res.json() }
+    }).then(user).catch(error => { console.log(error) })
+    setMessage("yes")
+    setIsSubmit(true)
+    console.log('Да')
+  }
+  
+}
 
 
   return (
@@ -97,7 +134,8 @@ const subscribeOn = async (e) => {
         <Header/>
         <Routes>
           <Route path='' element={<Home toys={toys} category={category} subscribers={subscribers} subscribeOn={subscribeOn} toysPhotosList={toysPhotos} exact/>} />
-          <Route path='product/category/:slug' element={<CategoryToys  category={category} />} exact />
+          <Route path='product/category/:slug' element={<CategoryToys category={category} />} exact />
+          <Route path='register/' element={<RegisterPage registerUser={registerUser} message={message} isSubmit={isSubmit}/>} exact/>
         </Routes>
 
         <Footer/>
