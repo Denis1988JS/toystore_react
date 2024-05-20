@@ -74,31 +74,6 @@
       "id": "1",
       "email": "mail@mail.ru",
       "time_sibsribe": "Mon Dec 24 2018 10:33:30 GMT+0700"
-    },
-    {
-      "id": "2",
-      "email": "mail13445@mail.ru",
-      "time_sibsribe": "2024-04-11T13:48:57.745Z"
-    },
-    {
-      "id": "3",
-      "email": "denis.d88@bk.ru",
-      "time_sibsribe": "2024-04-12T07:22:30.256Z"
-    },
-    {
-      "id": "4",
-      "email": "denis777.d88@bk.ru",
-      "time_sibsribe": "2024-04-12T07:22:36.551Z"
-    },
-    {
-      "id": "5",
-      "email": "denis7777.d88@bk.ru",
-      "time_sibsribe": "2024-04-12T07:22:44.002Z"
-    },
-    {
-      "id": "6",
-      "email": "zuzuZa@mail.ru",
-      "time_sibsribe": "2024-04-12T07:22:50.997Z"
     }
   ],
   "toy_photos": [
@@ -135,22 +110,51 @@
   ],
   "users": [
     {
-      "id": "admin_777",
-      "name": "admin",
-      "email": "mail1@mail.ru",
+      "id": "1",
+      "name": "puma",
+      "email": "mail@mail.ru",
       "password": "qwerty"
     },
     {
-      "id": "8c54",
-      "name": "Марина",
-      "email": "mail@mail.ru",
-      "password": "qwerty123!2"
+      "id": "7605",
+      "name": "Диана",
+      "email": "email@email.ru",
+      "password": "лорврппо"
     },
     {
-      "id": "23ce",
-      "name": "Диана",
-      "email": "zuzuZa@mail.ru",
-      "password": "87jhjhg"
+      "id": "5ed9",
+      "name": "Nike",
+      "email": "email1@email.ru",
+      "password": "вапролджолрпарпр"
+    }
+  ],
+  "cart": [
+    {
+      "id": "8ef1",
+      "user_id": "7605",
+      "product_id": "4",
+      "product_name": "Little Friend",
+      "product_price": 27,
+      "product_quantity": 2,
+      "product_image": "images/toys/Little Friend.svg"
+    },
+    {
+      "id": "ad5a",
+      "user_id": "7605",
+      "product_id": "3",
+      "product_name": "Cute Dog",
+      "product_price": 24,
+      "product_quantity": 3,
+      "product_image": "images/toys/Cute Dog.svg"
+    },
+    {
+      "id": "5cc0",
+      "user_id": "7605",
+      "product_id": "2",
+      "product_name": "Mega Plush Toy",
+      "product_price": 38,
+      "product_quantity": 3,
+      "product_image": "images/toys/Mega Plush Toy.svg"
     }
   ]
 }

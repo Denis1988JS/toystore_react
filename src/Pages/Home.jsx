@@ -8,11 +8,10 @@ import Subscribe from '../Components/Subscribe/Suscribe';//Блок подпис
 import ToysPhotos from '../Components/ToysPhotos/ToysPhotos';//Блок список фотографий игрушек
 //импорт компонентом
 
-function Home(props){
-	//Получаем пропсы по отдельности
-	let cat_list = props.category;
-	let product_list = props.toys;
-	
+function Home({ toys, category, subscribers, toysPhotos, addToCart }){
+
+
+
 	return (
 		<main className={s.wrapper_page}>
 			<section className={s.banner}>
@@ -31,7 +30,7 @@ function Home(props){
 			</section>
 			<section className={s.products_section}>
 				<div className={s.category_links_list}>
-					{cat_list.map((e, counter=0 )=>{
+					{category.map((e, counter=0 )=>{
 						counter +=1;
 						return(
 						counter%2!==0?(
@@ -44,7 +43,7 @@ function Home(props){
 										<h2 className={s.content_title}>
 											{e.name}
 										</h2>
-											<Link to={`/product/category/${e.slug}`} className={s.link_btn} state={{ "product_list": product_list, "cat_id": e.id, "cat_name": e.name }}>Shop Now</Link>
+											<Link to={`/product/category/${e.slug}`} className={s.link_btn} state={{ "product_list": toys, "cat_id": e.id, "cat_name": e.name }}>Shop Now</Link>
 									</div>
 								</div>
 							</div>
@@ -54,7 +53,7 @@ function Home(props){
 									<h2 className={s.content_title}>
 										{e.name}
 									</h2>
-											<Link to={`/product/category/${e.slug}`} className={s.link_btn} state={{ "product_list": product_list, "cat_id": e.id, "cat_name": e.name }}>Shop Now</Link>
+											<Link to={`/product/category/${e.slug}`} className={s.link_btn} state={{ "product_list": toys, "cat_id": e.id, "cat_name": e.name }}>Shop Now</Link>
 								</div>
 								<div className={s.item_wooden_content_image}>
 									<img src="images/home/wooden_banner.svg" alt="Баннер" />
@@ -95,15 +94,15 @@ function Home(props){
 				</div>
 			</section>
 			<section className={s.product_list}>
-				{cat_list.map((cat)=>{
+				{category.map((cat)=>{
 					//Рендер карточек-ссылок категорий
 					return <div className={s.product_list_block} key={cat.id}>
 								<h3 className={s.product_list_header}>{cat.name}</h3>
 								<div className={s.product_tabs_list}>
-									{product_list.map((toy)=>{
+									{toys.map((toy)=>{
 										//Рендер карточек товаров
 										return toy.category_id==cat.id?(
-											<ToyCart key={toy.id} id={toy.id} image={toy.image} title={toy.name} price={toy.price} />
+											<ToyCart key={toy.id} id={toy.id} image={toy.image} title={toy.name} price={toy.price} addToCart={addToCart}/>
 										):(null)
 									})}
 								</div>
@@ -112,8 +111,8 @@ function Home(props){
 			</section>
 			<VideoContent />
 			<EcommerceTemplate />
-			<Subscribe subscribers={props.subscribers} subscribeOn={props.subscribeOn} />
-			<ToysPhotos toysPhotosList={props.toysPhotosList} />
+			<Subscribe />
+			<ToysPhotos toysPhotos={toysPhotos} />
 		</main>
 	)
 };

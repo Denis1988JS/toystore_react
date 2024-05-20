@@ -75,17 +75,43 @@
 .nav_link_item:hover {
 	box-shadow: rgba(0, 0, 0, 0.4) 0px 5px;
 }
+
+
+
+
 .cart_order_login_link {
 	display: flex;
 	gap: 15px;
 	align-items: center;
 	height: 100%;
 }
-.login_link {
+.register_link {
 	border-radius: 10px;
 	background-color: #A5C926;
 	width: 113px;
 	height: 22px;
+	position: relative;
+}
+.register_link span {
+	position: absolute;
+	font-size: 12px;
+	color: #fff;
+	line-height: 18px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.register_link:hover {
+	background-color: coral;
+}
+.cart:hover, .order:hover {
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 5px;
+}
+.login_link {
+	border-radius: 15px;
+	background-color: #A5C926;
+	width: 30px;
+	height: 30px;
 	position: relative;
 }
 .login_link span {
@@ -96,10 +122,8 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+
 }
 .login_link:hover {
 	background-color: coral;
-}
-.cart:hover, .order:hover {
-	box-shadow: rgba(0, 0, 0, 0.4) 0px 5px;
 }

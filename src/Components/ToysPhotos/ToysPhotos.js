@@ -1,13 +1,10 @@
 import React from 'react';
 import s from './ToysPhotos.module.css'//Стили
 import { NavLink } from 'react-router-dom';//Для ссылок
-//url json-server
-let url = 'http://localhost:3001/' // url-для сапросов на сервер
 
 
 //Компонент фотографии товаров
-function ToysPhotos(props){
-	const toysProtoList = props.toysPhotosList;
+function ToysPhotos({ toysPhotos }){
 	
 	return(
 		<section className={s.wrapperToysPhotos}>
@@ -15,7 +12,7 @@ function ToysPhotos(props){
 			<h2 className={s.toysPhotoTitleHeader}>We're on Instagram!</h2>
 			<div className={s.toysPhotosList}>
 				{
-					toysProtoList.map((e)=> {
+					toysPhotos.map((e)=> {
 						return (
 							<div className={s.protoCart} key={e.id}>
 								<img src={e.url} alt={e.name} />

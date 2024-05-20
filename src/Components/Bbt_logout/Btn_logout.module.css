@@ -1,0 +1,19 @@
+.btn_logout {
+	background-color: #FB416B;
+	padding: 7px 13px;
+	border-radius: 16px;
+	font-size: 12px;
+	line-height: 20px;
+	font-weight: 500;
+	color: #fff;
+	transition: all 0.8s ease;
+}
+.btn_logout:hover {
+	background-color: #FFC12C;
+	padding: 7px 13px;
+	border-radius: 16px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 20px;
+	color: #020202;
+}

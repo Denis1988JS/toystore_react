@@ -1,0 +1,124 @@
+.cartBlock {
+	max-width: 1200px;
+	padding: 100px 15px;
+	margin: 0px auto;
+}
+.cartBlockHeader {
+	font-size: 28px;
+	line-height: 36px;
+	font-weight: 500;
+	padding-bottom: 25px;
+	border-bottom: 2px solid #E5E5E5;
+	position: relative;
+}
+.cartBlockHeader:after {
+	content: '';
+	position: absolute;
+	background-color: #A5C926;
+	width: 136px;
+	height: 2px;
+	display: block;
+	bottom: -2px;
+	left: 0;
+}
+/*Таблица корзины покупок*/
+.cartListTable {
+	width: 100%;
+	height: auto;
+}
+/*Шапка таблицы корзины покупок*/
+.cartListTableHeader {
+	margin-top: 50px;
+	background-color: #A5C926;
+	display: flex;
+	font-size: 14px;
+   color: #fff;
+   line-height: 24px;
+	justify-content: flex-start;
+	align-items: center;
+}
+.cartListTableHeader div {
+	border-left: 1px solid white;
+	padding: 10px 5px;
+	
+}
+.numberHeader{
+	flex: 0 1 30px;
+	text-align: center;
+}
+.nameHeader {
+	flex: 1 1 auto;
+	text-align: left;
+}
+.quantityHeader {
+	flex: 0 1 100px;
+	text-align: center;
+}
+.priceHeader {
+	flex: 0 1 60px;
+	text-align: center;
+}
+.summHeader {
+	flex: 0 1 60px;
+	text-align: center;
+}
+.addHeader , .minusHeader, .delHeader {
+	flex: 0 1 40px;
+	text-align: center;
+}
+
+/*Ряд таблицы корзины покупок*/
+.cartListTableRow {
+	width: 100%;
+	display: flex;
+	transition: all 0.7s ease-in-out;
+}
+.cartListTableRow:hover {
+	background-color: #fff;
+}
+.cartListTableRow div {
+	border-left: 1px solid white;
+	padding: 10px 5px;
+	font-size: 14px;
+   line-height: 20px
+}
+.numberRow{
+	flex: 0 1 30px;
+	text-align: center;
+}
+.cartListTableRow svg:hover {
+	color: #A5C926;
+
+}
+.nameRow {
+	flex: 1 1 auto;
+	text-align: left;
+}
+.quantityRow {
+	flex: 0 1 100px;
+	text-align: center;
+}
+.priceRow {
+	flex: 0 1 60px;
+	text-align: center;
+}
+.summRow {
+	flex: 0 1 60px;
+	text-align: center;
+}
+.addRow , .minusRow, .delRow {
+	flex: 0 1 40px;
+	text-align: center;
+}
+/*Стили цвета - для row-корзины*/
+.firstRow {
+	background-color: #FFC12C;
+}
+.secondRow {
+	background-color: #FB416B;
+}
+.buttonChange {
+	width: 100%;
+	height: 100%;
+	background-color: inherit;
+}

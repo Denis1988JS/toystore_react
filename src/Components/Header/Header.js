@@ -1,9 +1,11 @@
 import React from 'react';
 import style from './Header.module.css';//Стили
 import { Link, NavLink } from 'react-router-dom';//Для ссылок
+import Btn_logout from '../Bbt_logout/Btn_logout';
 
 //Функциональный компонент шапка сайта - Header
-function Header(props){
+function Header({ authUser, logOut }){
+
 	return(
 		<header className={style.header}>
 			<div className={style.header_top}>
@@ -54,13 +56,25 @@ function Header(props){
 						</a>
 					</div>
 					<div className={style.cart_order_login_link}>
-						<a href="#" className={style.cart}>Cart</a>
-						<a href="#" className={style.order}>
-							<img src="images/header/order_link.svg" alt="orders" />
-						</a>
-						<Link to="register/" className={style.login_link}>
-							<span>Регистрация</span>
-						</Link>
+						{
+							authUser ? 
+								<div className={style.cart_order_login_link}>
+									<Link to="cart/" className={style.cart}>Cart</Link>
+									<a href="#" className={style.order}>
+										<img src="images/header/order_link.svg" alt="orders" />
+									</a>
+									<a href="#" className={style.login_link}>
+										<span>{authUser.name.slice(0,1).toUpperCase()}</span>
+									</a>
+									<Btn_logout logOut={logOut}/>
+								</div> 
+							:
+								<div className={style.register_link}>
+									<Link to="register/">
+										<span>Регистрация</span>
+									</Link>
+								</div>
+						}
 					</div>
 				</nav>
 			</div>

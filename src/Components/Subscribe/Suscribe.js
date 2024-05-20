@@ -16,7 +16,7 @@ function Subscribe(props){
 					</div>
 					<p className={s.subscribeContent}>Subscribe to our newsletter & get <span>10% discount!</span></p>
 				</div>
-				<form action='http://localhost:3001/subscribers' method='post' className={s.subscribeForm} onSubmit={props.subscribeOn}>
+				<form action='http://localhost:3001/subscribers' method='post' className={s.subscribeForm} >
 					<input type='email' name='email' placeholder='Enter your e-mail' className={s.subscribeInputEmail}/>
 					<input type="hidden" name="time" value=""/>
 					<input type="submit" value="Subscribe" className={s.subscribeFormSend}/>

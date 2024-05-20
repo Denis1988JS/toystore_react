@@ -8,7 +8,6 @@ import ToyCart from '../Components/ToysCart/ToysCart';//Карточки тов�
 //Компонент товары определенной категории
 function CategoryToys(props){
 	const [filterToys, setFilterToys] = useState([])
-	let { slug } = useParams();//Получаем параметр
 	//Получить данные определенной категории
 	const location = useLocation();
 	const cat_name = location.state['cat_name'];
@@ -19,7 +18,7 @@ function CategoryToys(props){
 		const takeCategoryToys =  async(cat_id,) => {
 		await fetch(`http://localhost:3001/toys/?category_id=${cat_id}`)
 			.then((response) => response.json())
-			.then((result) => { setFilterToys(result) ; console.log(result) })
+			.then((result) => { setFilterToys(result)})
 			.catch((error) => console.error(error));
 	}
 	takeCategoryToys(cat_id)
