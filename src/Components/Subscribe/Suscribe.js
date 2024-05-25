@@ -4,8 +4,17 @@ import s from './Subscribe.module.css'//Стили
 let url = 'http://localhost:3001/' // url-для сапросов на сервер
 
 //Компонент подписка на скидку
-function Subscribe(props){
-
+function Subscribe({ subscriptionHandle, subscriptionRef, subscribeMessage }){
+	let message = '';
+	if (subscribeMessage===''){
+		message = ''
+	}
+	else if (subscribeMessage === false) {
+		message = `Подписка была оформлена ранее`
+	}
+	else if (subscribeMessage === true) {
+		message = `Вы успешно оформили подписку`
+	}
 	
 	return(
 		<section className={s.subscribeWripper}>
@@ -16,13 +25,13 @@ function Subscribe(props){
 					</div>
 					<p className={s.subscribeContent}>Subscribe to our newsletter & get <span>10% discount!</span></p>
 				</div>
-				<form action='http://localhost:3001/subscribers' method='post' className={s.subscribeForm} >
-					<input type='email' name='email' placeholder='Enter your e-mail' className={s.subscribeInputEmail}/>
+				<form action='#'  className={s.subscribeForm} >
+					<input type='email' name='email' placeholder='Enter your e-mail' className={s.subscribeInputEmail} ref={subscriptionRef}/>
 					<input type="hidden" name="time" value=""/>
-					<input type="submit" value="Subscribe" className={s.subscribeFormSend}/>
+					<input type="button" value="Subscribe" className={s.subscribeFormSend} onClick={() => { subscriptionHandle() }}/>
 				</form>
 				<div className={s.message_block} id='message_block'>
-
+					<p>{message}</p>
 				</div>
 			</div>
 		</section>

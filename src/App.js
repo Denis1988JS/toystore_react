@@ -7,8 +7,9 @@ import Footer from './Components/Footer/Footer';//подвал сайта
 import Home from './Pages/Home';//домашняя страница
 import RegisterPage from './Pages/RegisterPage';//Регистрация на сайте
 import CategoryToys from './Pages/CategoryToys';//Страница товары в разрезе категории
-import AuthorisationPage from './Pages/AuthorisationPage';
-import CartPage from './Pages/CartPage';
+import AuthorisationPage from './Pages/AuthorisationPage';//Страница авторизация на сайте
+import CartPage from './Pages/CartPage';//Страница - корзина покупок
+import Checkout from './Pages/Checkout';//Страница - подстверждение заказа
 
 //url json-server
 let url = 'http://localhost:3001/' // url-для сапросов на сервер
@@ -23,6 +24,9 @@ function App() {
   const [lSUser, setLSUser] = React.useState([]);//Состояние данные из localestorage - пользователь
   const [redirectPath, setRedirectPath] = React.useState(false);//Состояние для перемещения при успешной авторизации/регистрации на главную старницу
   const [userCartItems, setUserCartItems] = React.useState([]);//Состояние - корзина товаров пользователя
+  const [subscribeMessage, setSubscribeMessage] = React.useState('');//Состояние - подписан ли пользователь/гость
+  //Ref
+  const subscriptionRef = React.useRef();//Хук useRef - на элемент формы подписки
 
 
   //-----------useEffect - при первой загрузке страниц------------//
@@ -34,7 +38,6 @@ function App() {
         //Получаем пользователя переопределяя authUser и еще возвращаем id-пользователя для получения корзины покупок
         const userID = await fetch(`${url}users/?name=${localStorageUser['name']}&email=${localStorageUser['email']}`).then((res) => { return res.json() }).then((resUser) => { setAuthUser(resUser[0]); return resUser[0] }).catch(error => { console.log(error) })
       //Получаем корзину покупок (список)
-      
         const cart = await fetch(`${url}cart/?user_id=${userID['id']}`).then((res) => res.json()).then((cart) => {return cart}).catch(error => { console.log(error) })
         setUserCartItems(cart)
     }
@@ -120,7 +123,6 @@ function App() {
 
   //Функция - авторизация на сайте + если регистрация успешна - авторизация - занесение в localStorage
   const authorisationUserForm = async (values) =>{
-    console.log('Авторизация на сайте', values)
     //Делаем запрос в бд поиск пользователя по name, email
     let userData = await fetch(`${url}users/?email=` + `${values.email}&name=` + `${values.name}&password=` + `${values.password}`).then((res) => { return res.json() }).then((resUser) => { return resUser }).catch(error => { console.log(error) })
     console.log(userData[0])
@@ -169,13 +171,9 @@ function App() {
   }
   //Функция - уаление товара из корзины
   const delFromCart = async (obj) => {
-    console.log('id-объекта', obj )
     //Меняем состояние корзины покупок userCartItems
-    console.log(userCartItems)
-    
     setUserCartItems((userCartItems) => userCartItems.filter((item) => item.id !== obj))
     //Запрос fetch на удаление товара из корзины по id товара - product_id
-    
     await fetch(`${url}cart/${obj}`,{
       method: "DELETE",
     }).then((response) => response.json())
@@ -223,7 +221,6 @@ function App() {
   //Функция - товар в корзине -1
   const minusToyCart = async (obj) => {
     if (obj.product_quantity > 1){
-      console.log(obj, 'Минус')
       //Создаем объект для добавления в корзину с + 1
       let newCartItems = {
         "id": obj.id,
@@ -262,16 +259,50 @@ function App() {
     else console.log('НЕТТТТТ')
   }
 
+  //Функция - подписка на сайте
+  const subscriptionHandle = async () => {
+    let subscriberEmail = subscriptionRef.current.value;
+    try {
+      const subscriber = await fetch(`${url}subscribers/?email=${subscriberEmail}`).then((res) => { return res.json() }).then((subscriberData) => { return subscriberData }).catch(error => { return [{email:false}]});
+      let emailSubscriber = subscriber[0]['email'];
+      if (String(emailSubscriber).toLowerCase() === String(subscriberEmail).toLowerCase()){
+        console.log(`По email ${subscriber[0]['email']} - уже подписка оформлена ранее`)
+        setSubscribeMessage(false)
+      }
+    }
+    catch (TypeError){
+      let newSubscriber = {
+        email:subscriberEmail,
+        time_sibsribe: new Date()
+      }
+      await fetch(`${url}subscribers/`,{
+        method:"POST",
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(newSubscriber)
+      }).then(res => {if (res.ok) {return res.json()}}).then().catch(error => { console.log(error) })
+      console.log('Вы успешно оформили подписку')
+      setSubscribeMessage(true)
+    }
+  }
+
+  //Функция - оформить заказ
+  const makeOrder = (values) => {
+    console.log(values)
+  }
+
   return (
     <Router>
       <div className='wrapper'>
         <Header authUser={authUser} logOut={logOut}/>
         <Routes>
-          <Route path='/' element={<Home toys={toys} category={category} toysPhotos={toysPhotos} addToCart={addToCart} exact/>} />
+          <Route path='/' element={<Home toys={toys} category={category} toysPhotos={toysPhotos} addToCart={addToCart} subscriptionHandle={subscriptionHandle} subscriptionRef={subscriptionRef} subscribeMessage={subscribeMessage} exact/>} />
           <Route path='product/category/:slug' element={<CategoryToys category={category} />} exact />
           <Route path='register/' element={<RegisterPage registerUserForm={registerUserForm} redirectPath={redirectPath} />} exact/>
           <Route path='authorisation/' element={<AuthorisationPage authorisationUserForm={authorisationUserForm} redirectPath={redirectPath}  exact/>}/>
-          <Route path='cart/' element={<CartPage userCartItems={userCartItems} delFromCart={delFromCart} plusToyCart={plusToyCart} minusToyCart={minusToyCart}/>}/>
+          <Route path='cart/' element={<CartPage userCartItems={userCartItems} delFromCart={delFromCart} plusToyCart={plusToyCart} minusToyCart={minusToyCart} makeOrder={makeOrder} />}/>
+          <Route path='make_chekout/' element={<Checkout makeOrder={makeOrder} userCartItems={userCartItems}/>}/>
         </Routes>
 
         <Footer/>

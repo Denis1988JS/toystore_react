@@ -8,7 +8,7 @@ import Subscribe from '../Components/Subscribe/Suscribe';//Блок подпис
 import ToysPhotos from '../Components/ToysPhotos/ToysPhotos';//Блок список фотографий игрушек
 //импорт компонентом
 
-function Home({ toys, category, subscribers, toysPhotos, addToCart }){
+function Home({ toys, category, toysPhotos, addToCart, subscriptionHandle, subscriptionRef, subscribeMessage }){
 
 
 
@@ -111,7 +111,7 @@ function Home({ toys, category, subscribers, toysPhotos, addToCart }){
 			</section>
 			<VideoContent />
 			<EcommerceTemplate />
-			<Subscribe />
+			<Subscribe subscriptionHandle={subscriptionHandle} subscriptionRef={subscriptionRef} subscribeMessage={subscribeMessage}/>
 			<ToysPhotos toysPhotos={toysPhotos} />
 		</main>
 	)

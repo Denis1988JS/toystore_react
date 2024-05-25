@@ -59,10 +59,11 @@ function Header({ authUser, logOut }){
 						{
 							authUser ? 
 								<div className={style.cart_order_login_link}>
-									<Link to="cart/" className={style.cart}>Cart</Link>
-									<a href="#" className={style.order}>
+									
+									<Link to="cart/" className={style.order}>
 										<img src="images/header/order_link.svg" alt="orders" />
-									</a>
+									</Link>
+									<Link to="#" className={style.cart}>Cart</Link>
 									<a href="#" className={style.login_link}>
 										<span>{authUser.name.slice(0,1).toUpperCase()}</span>
 									</a>
