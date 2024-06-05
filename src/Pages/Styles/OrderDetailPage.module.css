@@ -1,0 +1,30 @@
+.order_detail_block {
+	max-width: 1200px;
+   padding: 100px 15px;
+   margin: 0px auto
+}
+.order_detail_header {
+	font-size: 28px;
+	line-height: 36px;
+	font-weight: 500;
+	padding-bottom: 25px;
+	border-bottom: 2px solid #E5E5E5;
+	position: relative;
+}
+.order_detail_header::after {
+	content: '';
+	position: absolute;
+	background-color: #A5C926;
+	width: 136px;
+	height: 2px;
+	display: block;
+	bottom: -2px;
+	left: 0;
+}
+.order_block_content {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 50px
+}

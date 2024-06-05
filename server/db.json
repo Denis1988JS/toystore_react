@@ -140,52 +140,72 @@
   ],
   "cart": [
     {
-      "id": "c633",
+      "id": "2cb1",
       "user_id": "7605",
-      "product_id": "6",
-      "product_name": "Lift Machine",
-      "product_price": 24,
-      "product_quantity": 3,
-      "product_image": "images/toys/Lift Machine.svg"
-    },
-    {
-      "id": "dc3f",
-      "user_id": "7605",
-      "product_id": "4",
-      "product_name": "Little Friend",
-      "product_price": 27,
-      "product_quantity": 3,
-      "product_image": "images/toys/Little Friend.svg"
-    },
-    {
-      "id": "e99f",
-      "user_id": "7605",
-      "product_id": "7",
-      "product_name": "Wooden Camera",
-      "product_price": 32,
-      "product_quantity": 4,
-      "product_image": "images/toys/Wooden Camera.svg"
-    },
-    {
-      "id": "f5fd",
-      "user_id": "7605",
-      "product_id": "3",
-      "product_name": "Cute Dog",
-      "product_price": 24,
-      "product_quantity": 2,
-      "product_image": "images/toys/Cute Dog.svg"
-    },
-    {
-      "id": "9d83",
-      "user_id": "7605",
-      "product_id": "5",
-      "product_name": "Happy Flower",
+      "product_id": "2",
+      "product_name": "Mega Plush Toy",
       "product_price": 38,
-      "product_quantity": 2,
-      "product_image": "images/toys/Happy Flower.svg"
+      "product_quantity": 1,
+      "product_image": "images/toys/Mega Plush Toy.svg"
+    }
+  ],
+  "order": [
+    {
+      "id": "b300",
+      "user_id": "7605",
+      "data": "2024-06-04T07:28:25.000Z",
+      "name": "Диана",
+      "email": "mail@mail.ru",
+      "phone": "89244225670",
+      "city": {
+        "region": "Москва и Московская обл.",
+        "city": "Краснознаменск",
+        "id": 70
+      },
+      "adress": "Ленина 1223",
+      "comment": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat iste aut velit quis doloremque n",
+      "paymentType": "cash",
+      "totalPrice": 270
     },
     {
-      "id": "1737",
+      "id": "8930",
+      "user_id": "7605",
+      "data": "2024-06-04T07:29:47.751Z",
+      "name": "Диана",
+      "email": "email@email.ru",
+      "phone": "89244225670",
+      "city": {
+        "region": "Москва и Московская обл.",
+        "city": "Белоомут",
+        "id": 11
+      },
+      "adress": "Ленина 1223",
+      "comment": "nvhm,m.,",
+      "paymentType": "cash",
+      "totalPrice": 144
+    },
+    {
+      "id": "56ac",
+      "user_id": "7605",
+      "data": "2024-06-04T07:32:30.607Z",
+      "name": "Диана",
+      "email": "mail@mail.ru",
+      "phone": "89244225670",
+      "city": {
+        "region": "Москва и Московская обл.",
+        "city": "Ашитково",
+        "id": 6
+      },
+      "adress": "Ленина 1223",
+      "comment": "trdyukhlj",
+      "paymentType": "cash",
+      "totalPrice": 48
+    }
+  ],
+  "productInOrder": [
+    {
+      "id": "6792",
+      "order_id": "b300",
       "user_id": "7605",
       "product_id": "1",
       "product_name": "Teddy Bear",
@@ -194,21 +214,73 @@
       "product_image": "images/toys/Teddy Bear.svg"
     },
     {
-      "id": "e503",
+      "id": "2e65",
+      "order_id": "b300",
+      "user_id": "7605",
+      "product_id": "3",
+      "product_name": "Cute Dog",
+      "product_price": 24,
+      "product_quantity": 4,
+      "product_image": "images/toys/Cute Dog.svg"
+    },
+    {
+      "id": "ac87",
+      "order_id": "b300",
       "user_id": "7605",
       "product_id": "2",
       "product_name": "Mega Plush Toy",
       "product_price": 38,
-      "product_quantity": 2,
+      "product_quantity": 3,
       "product_image": "images/toys/Mega Plush Toy.svg"
     },
     {
-      "id": "d34e",
+      "id": "c82b",
+      "order_id": "8930",
+      "user_id": "7605",
+      "product_id": "7",
+      "product_name": "Wooden Camera",
+      "product_price": 32,
+      "product_quantity": 2,
+      "product_image": "images/toys/Wooden Camera.svg"
+    },
+    {
+      "id": "e26c",
+      "order_id": "8930",
+      "user_id": "7605",
+      "product_id": "6",
+      "product_name": "Lift Machine",
+      "product_price": 24,
+      "product_quantity": 2,
+      "product_image": "images/toys/Lift Machine.svg"
+    },
+    {
+      "id": "f19b",
+      "order_id": "8930",
       "user_id": "7605",
       "product_id": "8",
       "product_name": "Little Rabbit",
       "product_price": 16,
       "product_quantity": 2,
+      "product_image": "images/toys/Little Rabbit.svg"
+    },
+    {
+      "id": "7bee",
+      "order_id": "56ac",
+      "user_id": "7605",
+      "product_id": "7",
+      "product_name": "Wooden Camera",
+      "product_price": 32,
+      "product_quantity": 1,
+      "product_image": "images/toys/Wooden Camera.svg"
+    },
+    {
+      "id": "f9b9",
+      "order_id": "56ac",
+      "user_id": "7605",
+      "product_id": "8",
+      "product_name": "Little Rabbit",
+      "product_price": 16,
+      "product_quantity": 1,
       "product_image": "images/toys/Little Rabbit.svg"
     }
   ]

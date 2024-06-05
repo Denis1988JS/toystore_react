@@ -127,3 +127,8 @@
 .login_link:hover {
 	background-color: coral;
 }
+.link_img {
+	width: 24px;
+	height: 20px;
+	object-fit: contain;
+}

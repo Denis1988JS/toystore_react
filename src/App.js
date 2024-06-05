@@ -9,7 +9,9 @@ import RegisterPage from './Pages/RegisterPage';//Регистрация на с
 import CategoryToys from './Pages/CategoryToys';//Страница товары в разрезе категории
 import AuthorisationPage from './Pages/AuthorisationPage';//Страница авторизация на сайте
 import CartPage from './Pages/CartPage';//Страница - корзина покупок
-import Checkout from './Pages/Checkout';//Страница - подстверждение заказа
+import Checkout from './Pages/Checkout';//Страница - подтверждение заказа
+import OrdersRage from './Pages/Orders';//Страница - список заказов пользователя
+import OrderDetail from './Pages/OrderDetailPage';//Страница - детализация заказа
 
 //url json-server
 let url = 'http://localhost:3001/' // url-для сапросов на сервер
@@ -23,12 +25,14 @@ function App() {
   const [authUser, setAuthUser] = React.useState('');//Хук - состояние авторизованный пользователь
   const [lSUser, setLSUser] = React.useState([]);//Состояние данные из localestorage - пользователь
   const [redirectPath, setRedirectPath] = React.useState(false);//Состояние для перемещения при успешной авторизации/регистрации на главную старницу
+  const [orderSuccessSubmit, setOrderSuccessSubmit] = React.useState(false);//Состояние для перемещения при успешном оформлении заказа
   const [userCartItems, setUserCartItems] = React.useState([]);//Состояние - корзина товаров пользователя
   const [subscribeMessage, setSubscribeMessage] = React.useState('');//Состояние - подписан ли пользователь/гость
+  const [userOrdersList, setUserOrdersList] = React.useState([]);//Состояние - заказы пользователя
+  const [productInOrder, setProductInOrder] = React.useState([]);//Состояние - список товаров в заказе - получаем по user_id - потом отображаем привязывая через order_id
   //Ref
   const subscriptionRef = React.useRef();//Хук useRef - на элемент формы подписки
-
-
+ 
   //-----------useEffect - при первой загрузке страниц------------//
   //Запрос на сервер при первой загрузке страницы - получаем пользователя из данных localStorege по name, email - меняем состояние authUser пользователя 
   React.useEffect(() => {
@@ -40,6 +44,9 @@ function App() {
       //Получаем корзину покупок (список)
         const cart = await fetch(`${url}cart/?user_id=${userID['id']}`).then((res) => res.json()).then((cart) => {return cart}).catch(error => { console.log(error) })
         setUserCartItems(cart)
+      //Получаем список заказов пользователя
+        const order = await fetch(`${url}order/?user_id=${userID['id']}`).then((res) => res.json()).then((cart) => { return cart }).catch(error => { console.log(error) })
+        setUserOrdersList(order)
     }
       else {
         setAuthUser('');
@@ -288,9 +295,70 @@ function App() {
   }
 
   //Функция - оформить заказ
-  const makeOrder = (values) => {
-    console.log(values)
-  }
+  const makeOrder = async (values) => {
+    //Общая сумма заказа 
+    let totalPrice = userCartItems.reduce((sum, obj) => (obj.product_price * obj.product_quantity) + sum, 0);
+    //Создаем заказ из данных формы +  POST запрос - передаем новый заказ в БД и получаем id-нового заказа
+    let newOrder = {
+      user_id: authUser.id,
+      data: new Date(),
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      city:values.city,
+      adress: values.address,
+      comment: values.comment,
+      paymentType: values.paymentType,
+      totalPrice: totalPrice,
+    }
+    let order_id = await fetch(`${url}order/`,{
+      method:'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(newOrder)
+    }).then(res => { if (res.ok) { return res.json() } }).then((order)=>{ return order.id }).catch(error => { console.log(error) })
+    //На основании корзины покупок создаем товары к заказу - привязка через id-заказа и id-пользователя
+    userCartItems.map((cart)=>{
+      let newProductInOrder = {
+        order_id: order_id,
+        user_id: authUser.id,
+        product_id: cart.product_id,
+        product_name: cart.product_name,
+        product_price: cart.product_price,
+        product_quantity: cart.product_quantity,
+        product_image: cart.product_image,
+      }
+      //запрос добавляем товар в базу данных - товары к заказам
+      fetch(`${url}productInOrder`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(newProductInOrder)
+      }).then(res => { if (res.ok) { return res.json() } }).then().catch(error => { console.log(error) })
+
+      //Запрос удаляем товар из корзины покупок (БД) и обновляем состояние userCartItems
+      //Меняем состояние корзины покупок userCartItems
+      setUserCartItems((userCartItems) => userCartItems.filter((item) => item.id !== cart.id))
+      //Запрос fetch на удаление товара из корзины по id товара - product_id
+      fetch(`${url}cart/${cart.id}`, {
+        method: "DELETE",
+      }).then((response) => response.json())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+    })
+    setOrderSuccessSubmit(true)
+  } 
+
+  //Запрос на сервер - получаем все товары во всех заказах
+  React.useEffect(() => {
+    const getProductInOrder = async () => {
+      let productInOrder = await fetch(`${url}productInOrder/?user_id=${authUser['id']}`).then((res) => { return res.json() }).then((listProduct) => { return listProduct }).catch(error => { console.log(error) })
+      setProductInOrder(productInOrder)
+    };
+    getProductInOrder()
+  }, [userOrdersList, userCartItems, authUser])
 
   return (
     <Router>
@@ -302,7 +370,9 @@ function App() {
           <Route path='register/' element={<RegisterPage registerUserForm={registerUserForm} redirectPath={redirectPath} />} exact/>
           <Route path='authorisation/' element={<AuthorisationPage authorisationUserForm={authorisationUserForm} redirectPath={redirectPath}  exact/>}/>
           <Route path='cart/' element={<CartPage userCartItems={userCartItems} delFromCart={delFromCart} plusToyCart={plusToyCart} minusToyCart={minusToyCart} makeOrder={makeOrder} />}/>
-          <Route path='make_chekout/' element={<Checkout makeOrder={makeOrder} userCartItems={userCartItems}/>}/>
+          <Route path='make_chekout/' element={<Checkout makeOrder={makeOrder} userCartItems={userCartItems} orderSuccessSubmit={orderSuccessSubmit}/>}/>
+          <Route path='orders/' element={<OrdersRage userOrdersList={userOrdersList} authUser={authUser} productInOrder={productInOrder}/>} />
+          <Route path='orders/:id' element={<OrderDetail />} exact/>
         </Routes>
 
         <Footer/>

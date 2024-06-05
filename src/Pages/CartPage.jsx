@@ -97,7 +97,7 @@ function CartPage({ userCartItems, delFromCart, minusToyCart, plusToyCart  }){
 					<div className={s.cartTotal}>
 						<div className={s.cartCunterProduct} >
 							<p>Итого наименований: {userCartItems.length} шт.</p>
-							<p>Итого на сумму : {totalPrice} руб.</p>
+							<p>Итого на сумму : {totalPrice} $.</p>
 						</div>
 						<div className={s.makeOrder}>
 							<button className={s.makeOrderBtn}>

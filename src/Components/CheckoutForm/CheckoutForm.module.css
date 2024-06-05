@@ -41,6 +41,10 @@ input:focus {
 	line-height: 20px;
 	color: #fff;
 	width: 100%;
+	transition: all 0.8s ease;
+}
+.btn_submit:hover {
+	background-color: #FB416B;
 }
 .muiAutocompleteBlock {
 	margin-top: 15px;
@@ -68,4 +72,10 @@ input:focus {
 	font-size: 21px;
 	line-height: 32px;
 	font-weight: bold
+}
+.error_message_p {
+	padding-top: 10px;
+	font-size: 16px;
+	color: red;
+	font-weight: 500;
 }

@@ -5,7 +5,6 @@ import { Link, Navigate } from 'react-router-dom';//Для ссылок
 
 //Форма регистрации пользователя
 function RegisterForm({ registerUserForm, redirectPath }){
-	console.log(redirectPath)
 	if (redirectPath == true) {
 		return <Navigate to={'/'}/>
 	}
@@ -24,6 +23,7 @@ function RegisterForm({ registerUserForm, redirectPath }){
 		onSubmit={(values, action) => {
 			registerUserForm(values)
 			action.resetForm();
+			
 		}}
 		>
 			{({values, errors, handleSubmit}) => (

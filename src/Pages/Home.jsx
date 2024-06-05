@@ -10,8 +10,6 @@ import ToysPhotos from '../Components/ToysPhotos/ToysPhotos';//Блок спис
 
 function Home({ toys, category, toysPhotos, addToCart, subscriptionHandle, subscriptionRef, subscribeMessage }){
 
-
-
 	return (
 		<main className={s.wrapper_page}>
 			<section className={s.banner}>
