@@ -32,7 +32,7 @@ function CategoryToys(props){
 				<div className={s.product_tabs_list}>
 					{
 						filterToys.map((e) => {
-							return <ToyCart key={e.id} id={e.id} image={e.image} title={e.name} price={e.price} />
+							return <ToyCart key={e.id} id={e.id} image={e.image} title={e.name} price={e.price} likesGoods={props.likesGoods} addLikes={props.addLikes} addToCart={props.addToCart} />
 						})
 					}
 				</div>

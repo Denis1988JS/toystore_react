@@ -8,7 +8,7 @@ import Subscribe from '../Components/Subscribe/Suscribe';//Блок подпис
 import ToysPhotos from '../Components/ToysPhotos/ToysPhotos';//Блок список фотографий игрушек
 //импорт компонентом
 
-function Home({ toys, category, toysPhotos, addToCart, subscriptionHandle, subscriptionRef, subscribeMessage }){
+function Home({ toys, category, toysPhotos, addToCart, subscriptionHandle, subscriptionRef, subscribeMessage, addLikes, likesGoods }){
 
 	return (
 		<main className={s.wrapper_page}>
@@ -35,6 +35,7 @@ function Home({ toys, category, toysPhotos, addToCart, subscriptionHandle, subsc
 							<div className={s.category_link_item_stuffed} key={counter}>
 								<div className={s.item_stuffed_content}>
 									<div className={s.item_stuffed_content_image}>
+										
 										<img src="images/home/stuffed_banner.svg" alt="Баннер" />
 									</div>
 									<div className={s.stuffed_content}>
@@ -53,9 +54,11 @@ function Home({ toys, category, toysPhotos, addToCart, subscriptionHandle, subsc
 									</h2>
 											<Link to={`/product/category/${e.slug}`} className={s.link_btn} state={{ "product_list": toys, "cat_id": e.id, "cat_name": e.name }}>Shop Now</Link>
 								</div>
+								
 								<div className={s.item_wooden_content_image}>
 									<img src="images/home/wooden_banner.svg" alt="Баннер" />
 								</div>
+
 							</div>
 						</div>)
 						)
@@ -100,7 +103,7 @@ function Home({ toys, category, toysPhotos, addToCart, subscriptionHandle, subsc
 									{toys.map((toy)=>{
 										//Рендер карточек товаров
 										return toy.category_id==cat.id?(
-											<ToyCart key={toy.id} id={toy.id} image={toy.image} title={toy.name} price={toy.price} addToCart={addToCart}/>
+											<ToyCart key={toy.id} id={toy.id} image={toy.image} title={toy.name} price={toy.price} addToCart={addToCart} addLikes={addLikes} likesGoods={likesGoods}/>
 										):(null)
 									})}
 								</div>

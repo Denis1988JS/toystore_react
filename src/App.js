@@ -12,6 +12,7 @@ import CartPage from './Pages/CartPage';//Страница - корзина по
 import Checkout from './Pages/Checkout';//Страница - подтверждение заказа
 import OrdersRage from './Pages/Orders';//Страница - список заказов пользователя
 import OrderDetail from './Pages/OrderDetailPage';//Страница - детализация заказа
+import AccauntPage from './Pages/AccauntPage';//Страница - личный кабинет пользователя
 
 //url json-server
 let url = 'http://localhost:3001/' // url-для сапросов на сервер
@@ -30,11 +31,12 @@ function App() {
   const [subscribeMessage, setSubscribeMessage] = React.useState('');//Состояние - подписан ли пользователь/гость
   const [userOrdersList, setUserOrdersList] = React.useState([]);//Состояние - заказы пользователя
   const [productInOrder, setProductInOrder] = React.useState([]);//Состояние - список товаров в заказе - получаем по user_id - потом отображаем привязывая через order_id
+  const [likesGoods, setLikesGoods] = React.useState([]);//Состояние - список избранных товаров
   //Ref
   const subscriptionRef = React.useRef();//Хук useRef - на элемент формы подписки
  
   //-----------useEffect - при первой загрузке страниц------------//
-  //Запрос на сервер при первой загрузке страницы - получаем пользователя из данных localStorege по name, email - меняем состояние authUser пользователя 
+  //Запрос на сервер при первой загрузке страницы - получаем пользователя из данных localStorege по name, email - меняем состояние authUser пользователя + избранные товары
   React.useEffect(() => {
     const getUser = async () => {
       let localStorageUser = JSON.parse(localStorage.getItem('authUserLS'));
@@ -47,6 +49,9 @@ function App() {
       //Получаем список заказов пользователя
         const order = await fetch(`${url}order/?user_id=${userID['id']}`).then((res) => res.json()).then((cart) => { return cart }).catch(error => { console.log(error) })
         setUserOrdersList(order)
+      //Избранные товары
+        const likesGoods = await fetch(`${url}likesGoods/?user_id=${userID['id']}`).then((res) => res.json()).then((likesGoods) => { return likesGoods }).catch(error => { console.log(error) })
+        setLikesGoods(likesGoods)
     }
       else {
         setAuthUser('');
@@ -54,7 +59,7 @@ function App() {
     };
     getUser()
   },[]);
-
+  
   //Получаем LocaleStorage и меняем состояние lSUser
   React.useEffect(() => {
       let localStorageUser = JSON.parse(localStorage.getItem('authUserLS'));
@@ -78,6 +83,7 @@ function App() {
       }
       fetchData();
   },[]);
+
   //-----------useEffect - при обновлении определенных компонентов------------//
 
   //При обновлении lSUser - когда регистрация на сайте при изменении lSUser (localeStorage) получаем пользователя из данных localStorege по name, email - меняем состояние authUser пользователя 
@@ -94,6 +100,10 @@ function App() {
     };
     getUser()
   }, [lSUser])
+
+  
+  //Функции обработчики --------------------
+
 
   //Функция - logOut - выход с сайта - очищаем localStorage -  меняем состояния authUser и lSUser
   const logOut = () => {
@@ -166,7 +176,7 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newCartItems),
-      }).then((res)=> {return res.json()}).then((newItem)=>{return newItem}).catch(error => { console.log(error, 'Ошибка регистрации !!!') })
+      }).then((res)=> {return res.json()}).then((newItem)=>{return newItem}).catch(error => { console.log(error, 'Ошибка !!!') })
       //Меняем состояние - userCartItems - корзину покупок
       setUserCartItems((prev) => [...prev, newItem])
       console.log('Добавили новый товар', newItem)
@@ -350,7 +360,6 @@ function App() {
     })
     setOrderSuccessSubmit(true)
   } 
-
   //Запрос на сервер - получаем все товары во всех заказах
   React.useEffect(() => {
     const getProductInOrder = async () => {
@@ -360,19 +369,52 @@ function App() {
     getProductInOrder()
   }, [userOrdersList, userCartItems, authUser])
 
+  //Функция - добавить товар в избранные (товар(obj) + id пользователя)
+  const addLikes = async(obj, user_id = authUser.id) => {
+    let likeId = '';
+    //Создаем объект для передачи в БД
+    let newLikesToy = {
+      "user_id": user_id,
+      "product_id":obj.toyId,
+      "product_name":obj.title,
+      "product_image":obj.image
+    }
+    if (likesGoods.find((fav) => Number(fav.product_id) === Number(obj.toyId,  likeId=fav.id))){
+      await fetch(`${url}likesGoods/${likeId}`, {
+        method: "DELETE",
+      }).then((response) => response.json())
+        .then((result) => result)
+        .catch((error) => console.error(error));
+      setLikesGoods((prev) => prev.filter((item) => Number(item.product_id) !== Number(obj.toyId)));
+    }
+      
+    else {
+      //Запрос в базу данных POST - вносим данные в БД
+      let newLikes = await fetch(`${url}likesGoods`,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newLikesToy),
+      }).then((res) => { return res.json() }).then((newToy) => { return newToy }).catch(error => { console.log(error, 'Ошибка !!!') })
+      setLikesGoods((prev) => [...prev, newLikes]);
+    }
+  }
+
   return (
     <Router>
       <div className='wrapper'>
         <Header authUser={authUser} logOut={logOut}/>
         <Routes>
-          <Route path='/' element={<Home toys={toys} category={category} toysPhotos={toysPhotos} addToCart={addToCart} subscriptionHandle={subscriptionHandle} subscriptionRef={subscriptionRef} subscribeMessage={subscribeMessage} exact/>} />
-          <Route path='product/category/:slug' element={<CategoryToys category={category} />} exact />
+          <Route path='/' element={<Home toys={toys} category={category} toysPhotos={toysPhotos} addToCart={addToCart} addLikes={addLikes} subscriptionHandle={subscriptionHandle} subscriptionRef={subscriptionRef} subscribeMessage={subscribeMessage} likesGoods={likesGoods} exact/>} />
+          <Route path='product/category/:slug' element={<CategoryToys category={category} likesGoods={likesGoods} addLikes={addLikes} addToCart={addToCart} />} exact />
           <Route path='register/' element={<RegisterPage registerUserForm={registerUserForm} redirectPath={redirectPath} />} exact/>
           <Route path='authorisation/' element={<AuthorisationPage authorisationUserForm={authorisationUserForm} redirectPath={redirectPath}  exact/>}/>
           <Route path='cart/' element={<CartPage userCartItems={userCartItems} delFromCart={delFromCart} plusToyCart={plusToyCart} minusToyCart={minusToyCart} makeOrder={makeOrder} />}/>
           <Route path='make_chekout/' element={<Checkout makeOrder={makeOrder} userCartItems={userCartItems} orderSuccessSubmit={orderSuccessSubmit}/>}/>
           <Route path='orders/' element={<OrdersRage userOrdersList={userOrdersList} authUser={authUser} productInOrder={productInOrder}/>} />
-          <Route path='orders/:id' element={<OrderDetail />} exact/>
+          <Route path='orders/:id' element={<OrderDetail />} exact />
+          <Route path='account/:id' element={<AccauntPage userData={lSUser} likesGoods={likesGoods}/>} exact />
         </Routes>
 
         <Footer/>

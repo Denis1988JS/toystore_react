@@ -1,0 +1,114 @@
+.accaunt_block {
+	max-width: 1200px;
+	padding: 100px 15px;
+	margin: 0px auto
+}
+.accaunt_block_header {
+	font-size: 28px;
+	line-height: 36px;
+	font-weight: 500;
+	padding-bottom: 25px;
+	border-bottom: 2px solid #E5E5E5;
+	position: relative
+}
+.accaunt_block_header:after {
+	content: '';
+	position: absolute;
+	background-color: #A5C926;
+	width: 136px;
+	height: 2px;
+	display: block;
+	bottom: -2px;
+	left: 0;
+}
+.accaunt_block_content {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 50px
+}
+
+/*Данные пользователя*/
+.account_block_info {
+	flex: 0 1 60%;
+	background-color: #fff;
+	border-radius: 16px;
+	padding: 16px
+}
+.account_info_header {
+	width: 100%;
+	text-align: center;
+	font-size: 21px;
+	line-height: 32px;
+	font-weight: bold;
+}
+.account_info {
+	width: 100%;
+	height: auto;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.account_info_data {
+	width: 100%;
+	background-color: #F8F8F8;
+	border: 2px solid #E5E5E5;
+	padding: 14px 20px;
+	margin-top: 15px;
+	display: flex;
+	gap: 20px;
+	align-items: center
+}
+.account_info_title {
+	flex: 0 0 35%;
+}
+.account_info_value {
+	flex: 0 1 auto;
+	line-height: 1.5;
+}
+
+
+
+
+/*Избранные товары*/
+.likes_goods {
+	flex: 0 1 35%;
+	background-color: #fff;
+	border-radius: 16px;
+	padding: 16px;
+}
+.likes_goods_header {
+	width: 100%;
+	text-align: center;
+	font-size: 21px;
+	line-height: 32px;
+	font-weight: bold;
+}
+.likes_goods_list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-top: 15px;
+	gap: 15px
+}
+.likes_goods_item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 14px 20px;
+	background-color: #F8F8F8;
+	border: 2px solid #E5E5E5;
+	transition: all 0.7s ease-in-out;
+	gap: 15px;
+	transition: all 0.5s ease-in-out;
+}
+.likes_goods_item:hover {
+	opacity: 0.7;
+	cursor: pointer;
+}
+.likes_goods_item img {
+	width: 50px;
+	height: auto;
+	object-fit: contain;
+}

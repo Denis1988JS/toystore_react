@@ -66,9 +66,9 @@ function Header({ authUser, logOut }){
 									<Link to="orders/" className={style.cart}>
 										<img src="images/header/orders.png" alt="orders" className={style.link_img }/>
 									</Link>
-									<a href="#" className={style.login_link}>
+									<Link to={`account/${authUser.id}`} className={style.login_link}>
 										<span>{authUser.name.slice(0,1).toUpperCase()}</span>
-									</a>
+									</Link>
 									<Btn_logout logOut={logOut}/>
 								</div> 
 							:

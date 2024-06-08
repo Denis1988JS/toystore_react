@@ -44,7 +44,7 @@ function OrderContent({ order }){
 				</div>
 				<div className={s.order_value}>
 					<p className={s.order_title}>Адрес доставки: </p>
-					<p className={s.order_info}>{order.city.region} \n г.{order.city.city} ул. {order.adress} </p>
+					<p className={s.order_info}>{order.city.region} г.{order.city.city} ул. {order.adress} </p>
 				</div>
 				<div className={s.order_value}>
 					<p className={s.order_title}>Ваш комментарий к заказу: </p>
